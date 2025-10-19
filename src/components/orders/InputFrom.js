@@ -13,6 +13,7 @@ const InputFrom = (props) => {
             quantity
         }
         props.onOrder(enteredObj);
+        event.target.reset();
         
     }
   return (

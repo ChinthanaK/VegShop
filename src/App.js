@@ -16,15 +16,26 @@ function App() {
  
     const updatedListItems = listItems.filter((item, i) => i !== index);
     setListItems(updatedListItems);
-    console.log(updatedListItems);
-    console.log(index);
+ }
+
+ const buyItemHandler = (index, amount) =>{
+    setListItems((prevItems) =>{
+      const updated = prevItems.map((item, i) =>{
+        if(i===index){
+          const netQuantity  = item.quantity -amount;
+          return {...item, quantity : netQuantity}
+        }
+        return item;
+      }).filter((item) => item.quantity>0);
+      return updated;
+    })
  }
 
   return (
     <div >
        <h1>VEG SHOP</h1>
       <InputFrom onOrder={orderDataHandler}/>
-      <List listItems={listItems} deleteItem = {deleteItemHandler}/>
+      <List listItems={listItems} deleteItem = {deleteItemHandler} onBuy={buyItemHandler}/>
     </div>
   );
 }
